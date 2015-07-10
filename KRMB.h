@@ -1,7 +1,7 @@
 #ifndef KRMB_H
 #define KRMB_H
 #include "Permutation.h"
-#include "BigInteger.h"
+#include "KRMBParam.h"
 #include <iostream>
 
 class KRMB
@@ -11,6 +11,7 @@ public:
   KRMB(const KRMB &other);
   ~KRMB();
   int getK() const;
+  int getN() const;
   int getA() const;
   int getB() const;
   int getC(int i) const;
@@ -20,9 +21,7 @@ public:
   bool next();
 
 private:
-  bool parametersAreValid();
-
-  BigInteger param;
+  KRMBParam param;
   size_t k;
   size_t nelmts;
 

@@ -1,15 +1,15 @@
 include ../Makefile.defs
-BINARIES=testbi testrmb testperm testpsa
+BINARIES=testrmb testrmbparam testperm testpsa
 
 all: $(BINARIES)
-
-testbi: testbi.cpp
-	$(CXX) $< -o $@
 
 testperm: testperm.cpp ../PermutationArray.o ../Permutation.o
 	$(CXX) $^ -o $@
 
-testrmb: testrmb.cpp ../BigInteger.o ../KRMB.o
+testrmb: testrmb.cpp ../KRMBParam.o ../KRMB.o
+	$(CXX) $^ -o $@
+
+testrmbparam: testrmbparam.cpp ../KRMBParam.o
 	$(CXX) $^ -o $@
 
 testpsa: testpsa.cpp ../PermutationStatus.o

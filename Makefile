@@ -1,5 +1,5 @@
 include Makefile.defs
-OBJS=BigInteger.o KRMB.o PermutationArray.o PermutationStatus.o Permutation.o
+OBJS=KRMBParam.o KRMB.o PermutationArray.o PermutationStatus.o Permutation.o
 
 all: krmbsorter.exe krmbdiam.exe
 
