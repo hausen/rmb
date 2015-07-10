@@ -1,0 +1,2 @@
+#CXX=g++ -DDEBUG -g -pg -Wall -Wuninitialized -Wextra -pedantic
+CXX=g++ -DNDEBUG -O3

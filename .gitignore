@@ -1,0 +1,6 @@
+*.exe
+*.o
+tests/testbi
+tests/testperm
+tests/testpsa
+tests/testrmb
