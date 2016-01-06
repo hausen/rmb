@@ -97,6 +97,10 @@ int main(int argc, char *argv[]) {
     std::cerr << "n cannot be greater than " << MAX_N << "!" << std::endl;
     exit(1);
   }
+  if (mink < 1) {
+    cerr << "Error: minK < 1" << endl;
+    return 1;
+  }
   if (maxk < mink) {
     cerr << "Error: maxK < minK" << endl;
     return 1;
