@@ -102,6 +102,10 @@ int main(int argc, char *argv[]) {
     cerr << "Error: n < maxK" << endl;
     return 1;
   }
+  if (mink < 1) {
+    cerr << "Error: minK < 1" << endl;
+    return 1;
+  }
   if (maxk < mink) {
     cerr << "Error: maxK < minK" << endl;
     return 1;
