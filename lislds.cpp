@@ -1,9 +1,10 @@
+#include <algorithm>
 #include <iostream>
 #include <stdlib.h>
 
 using namespace std;
 
-int binSearchLargest(int N, int* X, int* M, int L, int i) {
+int binSearchLargest(int* X, int* M, int L, int i) {
   int lo=1;
   int hi=L;
   while (lo <= hi) {
@@ -22,7 +23,7 @@ int* lis(int N, int* X, int& L) {
   int* M = new int[N+1]();
   L = 0;
   for (int i=0; i<N; ++i) {
-    int newL = binSearchLargest(N, X, M, L, i);
+    int newL = binSearchLargest(X, M, L, i);
 
     P[i] = M[newL-1];
     M[newL] = i;
@@ -45,7 +46,7 @@ int* lis(int N, int* X, int& L) {
   return S;
 }
 
-int binSearchSmallest(int N, int* X, int* M, int L, int i) {
+int binSearchSmallest(int* X, int* M, int L, int i) {
   int lo=1;
   int hi=L;
   while (lo <= hi) {
@@ -64,7 +65,7 @@ int *lds(int N, int *X, int &L) {
   int* M = new int[N+1]();
   L = 0;
   for (int i=0; i<N; ++i) {
-    int newL = binSearchSmallest(N, X, M, L, i);
+    int newL = binSearchSmallest(X, M, L, i);
 
     P[i] = M[newL-1];
     M[newL] = i;
@@ -87,34 +88,55 @@ int *lds(int N, int *X, int &L) {
   return S;
 }
 
+ostream& printPermutation(int* p, int n, ostream& os) {
+  for (int i=0; i<n; ++i) {
+    if (i > 0) os << " ";
+    os << p[i];
+  }
+  return os;
+}
 
 int main(int argc, char *argv[]) {
-  int N = argc - 1;
-  if (N < 1) {
-    cerr << "Usage: " << argv[0] << " p1 p2 .. pN" << endl;
+  if (argc < 1) {
+    cerr << "Usage: " << argv[0] << " N" << endl;
     return 1;
   }
+  int N = atoi(argv[1]);
+
   int* X = new int[N];
-  for (int i=1; i<argc; ++i) {
-    X[i-1] = atoi(argv[i]);
+  for (int i=0; i<N; ++i) {
+    X[i] = i+1;
   }
 
-  int L;
-  int* S = lis(N, X, L);
+  int lisLen, ldsLen;
+  int* lisArray, * ldsArray;
 
-  cout << "LIS =";
-  for (int i=0; i<L; ++i) {
-    cout << " " << S[i];
-  }
-  cout << endl;
-  delete S;
+  do {
 
-  S = lds(N, X, L);
+    lisArray = lis(N, X, lisLen);
+    if (lisLen >= N/2.0) {
+      delete lisArray;
+      continue;
+    }
+    ldsArray = lds(N, X, ldsLen);
+    if (ldsLen > N/2.0) {
+      delete lisArray;
+      delete ldsArray;
+      continue;
+    }
 
-  cout << "LDS =";
-  for (int i=0; i<L; ++i) {
-    cout << " " << S[i];
-  }
-  cout << endl;
+    printPermutation(X, N, cout) << endl;
 
+    cout << "LIS = ";
+    printPermutation(lisArray, lisLen, cout) << endl;
+    delete lisArray;
+
+    cout << "LDS = ";
+    printPermutation(ldsArray, ldsLen, cout) << endl;
+    delete ldsArray;
+
+    cout << endl;
+  } while ( next_permutation(X, X+N) );
+
+  delete X;
 }
