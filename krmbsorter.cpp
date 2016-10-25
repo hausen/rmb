@@ -79,7 +79,7 @@ deque<KRMB> *sort(PermutationArray *p, PermutationArray *parent, int dmax)
         if (seq != NULL) delete seq;
         dmax = newseq->size();
         newseq->push_front(*itRMB);
-        if (dmax == 1) return newseq;
+        if (dmax == 0) return newseq;
         seq = newseq;
       } else {
         delete newseq;
